@@ -1,10 +1,3 @@
-const data = [
-  { id : 0, type : 'activity',  status : 'created' },
-  { id : 1, type : 'activity',  status : 'created' },
-  { id : 2, type : 'milestone', status : 'created' },
-  { id : 3, type : 'activity',  status : 'ready to start' },
-]
-
 // map of map - n times
 // ex nMap( 3, f ) => map( map( map( f ) ) ) )
 const nMap = R.curry(
@@ -26,49 +19,6 @@ const groupByProps = ( props, needOmit = true ) => R.pipe(
     props
   )
 )
-
-const tree = {
-  _ : {
-    checked : false,
-    children : {
-      'activity' : {
-        checked : false,
-        children : {
-          'created' : {
-            checked : false,
-            children : {
-              '0' : { checked : false },
-              '1' : { checked : false },
-            },
-          },
-          'ready to start' : {
-            checked : false,
-            children : {
-              '3' : { checked : false },
-            },
-          },
-        },
-      },
-      'milestone' : {
-        checked : false,
-        children : {
-          'created' : {
-            checked : false,
-            children : {
-              '2' : { checked : false },
-            },
-          },
-        },
-      },
-    },
-  },
-  _gropingKey : 'type.status',
-}
-
-const print = ( obj ) =>
-  console.log(
-    JSON.stringify( obj, null, 2)
-  )
 
 const _get = ( [ cur, ...rest ], tree ) => rest.length
   ? _get( rest, tree[ cur ].children )
@@ -96,7 +46,6 @@ const addChecked = R.map(
   } )
 )
 
-
 // build tree-like structure using data and grouping 
 const buildTree = ( grouping, data ) => {
   const grouped = groupByProps( grouping )( data )
@@ -105,12 +54,13 @@ const buildTree = ( grouping, data ) => {
       checked : false,
       children : addChecked( grouped )
     },
-    groupKey : R.join( '.', grouping ),
+    groupingKey : R.join( '.', grouping ),
   }
 }
 
 // update existing tree with new data
 const updateTree = ( data, tree ) => {
+  
 }
 
 // check or uncheck groups / nodes using provided path
@@ -123,5 +73,18 @@ const getChecked = ( tree ) => {
 
 // check if selected node is checked
 const isGroupChecked = ( path, tree ) => get( path, tree ).checked
+
+
+const print = ( obj ) =>
+  console.log(
+    JSON.stringify( obj, null, 2)
+  )
+
+const data = [
+  { id : 0, type : 'activity',  status : 'created' },
+  { id : 1, type : 'activity',  status : 'created' },
+  { id : 2, type : 'milestone', status : 'created' },
+  { id : 3, type : 'activity',  status : 'ready to start' },
+]
 
 print( buildTree( [ 'type', 'status' ], data ) )
