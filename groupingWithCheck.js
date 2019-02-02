@@ -1,4 +1,4 @@
-inport R from 'ramda'
+import R from 'ramda'
 
 // map of map - n times
 // ex nMap( 3, f ) => map( map( map( f ) ) ) )
