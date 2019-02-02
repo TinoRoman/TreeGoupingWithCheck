@@ -6,7 +6,7 @@ const nMap = R.curry(
     : f
 )
 
-// group by several props with omiting them in result or not
+// group by several props with omiting them in the result or not
 const groupByProps = ( props, needOmit = true ) => R.pipe(
   ...R.addIndex( R.map )(
     ( prop, index ) =>
