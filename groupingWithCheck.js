@@ -1,3 +1,5 @@
+inport R from 'ramda'
+
 // map of map - n times
 // ex nMap( 3, f ) => map( map( map( f ) ) ) )
 const nMap = R.curry(
@@ -64,7 +66,7 @@ const updateTree = ( data, tree ) => {
 }
 
 // check or uncheck groups / nodes using provided path
-const toggleCheck = ( path, check, data ) => {
+const toggleCheck = ( path, check, tree ) => {
   // todo: implement
 }
 
@@ -92,3 +94,10 @@ const data = [
 ]
 
 print( buildTree( [ 'type', 'status' ], data ) )
+
+export {
+  buildTree,
+  toggleCheck,
+  getChecked,
+  isGroupChecked,
+}
