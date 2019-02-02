@@ -60,20 +60,24 @@ const buildTree = ( grouping, data ) => {
 
 // update existing tree with new data
 const updateTree = ( data, tree ) => {
-  
+  // todo: implement
 }
 
 // check or uncheck groups / nodes using provided path
 const toggleCheck = ( path, check, data ) => {
+  // todo: implement
 }
 
 // get ids of all checked leaf nodes
 const getChecked = ( tree ) => {
+  // todo: implement
 }
 
 // check if selected node is checked
 const isGroupChecked = ( path, tree ) => get( path, tree ).checked
 
+
+// examples
 
 const print = ( obj ) =>
   console.log(
