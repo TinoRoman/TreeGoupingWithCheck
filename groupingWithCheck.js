@@ -48,6 +48,14 @@ const addChecked = R.map(
   } )
 )
 
+const _getChecked = R.curry( ( count, tree ) => count > 1
+  ? R.pipe(
+      R.flatten,
+      R.mergeAll,
+    )( R.map( getChecked( count - 1 ), Object.values( tree.children ) ) )
+  : tree.children
+)
+
 // build tree-like structure using data and grouping 
 const buildTree = ( grouping, data ) => {
   const grouped = groupByProps( grouping )( data )
@@ -71,8 +79,12 @@ const toggleCheck = ( path, check, tree ) => {
 }
 
 // get ids of all checked leaf nodes
-const getChecked = ( tree ) => {
-  // todo: implement
+const getChecked = ( tree ) => {    
+  return R.pipe(
+    R.map( R.prop( 'checked' ) ),
+    R.filter( R.identity ),
+    R.keys
+  )( getChecked( tree.groupingKey.split( '.' ).length + 1, tree._ ) )
 }
 
 // check if selected node is checked
